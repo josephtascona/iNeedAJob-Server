@@ -20,6 +20,13 @@ mongoose.connect(process.env.DATABASE_URL, {
     console.log(`Connection Error: ${err}`)
 })
 
+// enbale CORS BEFORE the controller declaration
+const cors = require('cors')
+app.use(cors({
+    origin: process.env.CLIENT_URL,
+    methods: 'GET,POST,PUT,DELETE,HEAD,OPTIONS'
+}))
+
 // map url path to controller
 const employers = require('./controllers/employers')
 app.use("/api/employers", employers)

@@ -10,7 +10,7 @@ router.get('/', (req,res) => {
         } else {
             return res.json(employers).status(200)
         }
-    })
+    }).sort('name')
 }) 
 
 module.exports = router
