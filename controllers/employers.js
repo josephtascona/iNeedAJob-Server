@@ -11,6 +11,39 @@ router.get('/', (req,res) => {
             return res.json(employers).status(200)
         }
     }).sort('name')
-}) 
+})
+
+// POST: /api/employers => save new employer from request body
+router.post('/', (req, res) => {
+    Employer.create(req.body, (err, newEmployer) => {
+        if (err) {
+            return res.json(err).status(400)
+        } else {
+            return res.json(newEmployer).status(201)
+        }
+    })
+})
+
+// DELETE: /api/employers/abc123 => delete selected employer
+router.delete('/:_id', (req, res) => {
+    Employer.deleteOne({ _id: req.params._id }, (err, deleteResponse) => {
+        if (err) {
+            return res.json(err).status(400)
+        } else {
+            res.json(deleteResponse).status(200)
+        }
+    })
+})
+
+// PUT: /api/employers/abc123 => updated selected employer
+router.put('/:_id', (req, res) => {
+    Employer.findOneAndUpdate({ _id: req.params._id }, req.body, (err, employer) => {
+        if (err) {
+            return res.json(err).status(400)
+        } else {
+            res.json(employer).status(202)
+        }
+    })
+})
 
 module.exports = router
