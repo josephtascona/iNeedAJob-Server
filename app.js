@@ -7,10 +7,7 @@ const bodyParser = require("body-parser")
 const app = express()
 app.use(bodyParser.json())
 
-// use dotenv if not in production mode
-if (process.env.NODE_ENV !== "production") {
-    require("dotenv").config()
-}
+require("dotenv").config()
 
 // db conn
 mongoose.connect(process.env.DATABASE_URL, {
